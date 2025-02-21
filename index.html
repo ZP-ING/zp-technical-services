@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZP Technical Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .logo-container {
+            display: inline-block;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            font-size: 6em;
+            font-weight: bold;
+            color: #4fc3f7;
+            text-shadow: 0 0 20px rgba(79, 195, 247, 0.7);
+            letter-spacing: 5px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: #4fc3f7;
+            box-shadow: 0 0 10px rgba(79, 195, 247, 0.7);
+        }
+
+        .subtitle {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #81d4fa;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px 0;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .service-icon {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .contact {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .phone {
+            font-size: 2.5em;
+            color: #4fc3f7;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .phone-icon {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #4fc3f7;
+            color: #000428;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.2em;
+        }
+
+        .cta-button:hover {
+            background: #81d4fa;
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(79, 195, 247, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            .logo {
+                font-size: 4em;
+            }
+            .phone {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <div class="logo">ZP</div>
+            </div>
+            <div class="subtitle">Technical Services</div>
+        </header>
+
+        <section class="services">
+            <div class="service-card">
+                <div class="service-icon">🖥️</div>
+                <h3>Windows</h3>
+                <p>Instalación y activación de Windows Professional</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📊</div>
+                <h3>Microsoft Office</h3>
+                <p>Suite completa de Office con activación</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3>Mantenimiento</h3>
+                <p>Mantenimiento preventivo y correctivo</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3>Limpieza</h3>
+                <p>Limpieza profesional de equipos</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⟳</div>
+                <h3>Actualizaciones</h3>
+                <p>Actualización de software y sistemas</p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📱</div>
+                <h3>Soporte</h3>
+                <p>Asistencia técnica personalizada</p>
+            </div>
+        </section>
+
+        <section class="contact">
+            <h2>¿Necesitas ayuda con tu equipo?</h2>
+            <div class="phone">
+                <span class="phone-icon">📞</span>
+                +57 310 650 79 40
+            </div>
+            <a href="tel:+573106507940" class="cta-button">Llamar ahora</a>
+        </section>
+
+        <footer>
+            <p>Soluciones tecnológicas profesionales a tu alcance</p>
+        </footer>
+    </div>
+</body>
+</html>
