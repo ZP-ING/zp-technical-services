@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZP Technical Services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* [Estilos anteriores se mantienen igual] */
         * {
             margin: 0;
             padding: 0;
@@ -65,28 +67,56 @@
         }
 
         .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
             padding: 40px 0;
         }
 
         .service-card {
             background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            transition: transform 0.3s ease;
-            text-align: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .service-card:hover {
+            background: rgba(255, 255, 255, 0.2);
             transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card.active {
             background: rgba(255, 255, 255, 0.2);
         }
 
+        .service-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2em;
+        }
+
         .service-icon {
-            font-size: 2em;
-            margin-bottom: 15px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .service-details {
+            display: none;
+            padding: 10px 0 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 10px;
+        }
+
+        .service-details ul {
+            list-style-type: none;
+        }
+
+        .service-details li {
+            margin: 10px 0;
+            font-size: 0.95em;
+            color: #ccc;
         }
 
         .contact {
@@ -108,21 +138,13 @@
             gap: 10px;
         }
 
-        .phone-icon {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .cta-button {
-            display: inline-block;
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             padding: 15px 30px;
-            background: #4fc3f7;
-            color: #000428;
+            background: #25D366;
+            color: white;
             text-decoration: none;
             border-radius: 25px;
             font-weight: bold;
@@ -130,10 +152,14 @@
             font-size: 1.2em;
         }
 
-        .cta-button:hover {
-            background: #81d4fa;
+        .whatsapp-button:hover {
+            background: #128C7E;
             transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(79, 195, 247, 0.5);
+            box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+        }
+
+        .whatsapp-icon {
+            font-size: 1.4em;
         }
 
         footer {
@@ -141,6 +167,24 @@
             padding: 20px;
             background: rgba(0, 0, 0, 0.3);
             margin-top: 40px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #4fc3f7;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background: #81d4fa;
+            transform: translateY(-5px);
         }
 
         @media (max-width: 768px) {
@@ -166,55 +210,152 @@
         </header>
 
         <section class="services">
-            <div class="service-card">
-                <div class="service-icon">🖥️</div>
-                <h3>Windows</h3>
-                <p>Instalación y activación de Windows Professional</p>
+            <div class="service-card" onclick="toggleService(1, 'Windows', ['Instalación de sistema operativo Windows', 'Formateo de Windows', 'Activación de Windows'])">
+                <div class="service-title">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" alt="Windows" class="service-icon">
+                    <h3>Windows</h3>
+                </div>
+                <div class="service-details" id="service-1">
+                    <ul>
+                        <li>Instalación de sistema operativo Windows</li>
+                        <li>Formateo de Windows</li>
+                        <li>Activación de Windows</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">📊</div>
-                <h3>Microsoft Office</h3>
-                <p>Suite completa de Office con activación</p>
+            <div class="service-card" onclick="toggleService(2, 'Microsoft Office', ['Instalación de Office (Word, Excel, PowerPoint)', 'Activación de Office', 'Solución de problemas de licencias'])">
+                <div class="service-title">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Microsoft Office" class="service-icon">
+                    <h3>Microsoft Office</h3>
+                </div>
+                <div class="service-details" id="service-2">
+                    <ul>
+                        <li>Instalación de Office (Word, Excel, PowerPoint)</li>
+                        <li>Activación de Office</li>
+                        <li>Solución de problemas de licencias</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">🔧</div>
-                <h3>Mantenimiento</h3>
-                <p>Mantenimiento preventivo y correctivo</p>
+            <div class="service-card" onclick="toggleService(3, 'Mantenimiento', ['Mantenimiento preventivo', 'Mantenimiento correctivo', 'Diagnóstico de hardware y software'])">
+                <div class="service-title">
+                    <i class="fas fa-tools service-icon"></i>
+                    <h3>Mantenimiento</h3>
+                </div>
+                <div class="service-details" id="service-3">
+                    <ul>
+                        <li>Mantenimiento preventivo</li>
+                        <li>Mantenimiento correctivo</li>
+                        <li>Diagnóstico de hardware y software</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">✨</div>
-                <h3>Limpieza</h3>
-                <p>Limpieza profesional de equipos</p>
+            <div class="service-card" onclick="toggleService(4, 'Limpieza', ['Limpieza del equipo por aire y líquida', 'Cambio de pasta térmica', 'Limpieza completa de hardware'])">
+                <div class="service-title">
+                    <i class="fas fa-broom service-icon"></i>
+                    <h3>Limpieza</h3>
+                </div>
+                <div class="service-details" id="service-4">
+                    <ul>
+                        <li>Limpieza del equipo por aire y líquida</li>
+                        <li>Cambio de pasta térmica</li>
+                        <li>Limpieza completa de hardware</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">⟳</div>
-                <h3>Actualizaciones</h3>
-                <p>Actualización de software y sistemas</p>
+            <div class="service-card" onclick="toggleService(5, 'Actualizaciones', ['Actualización de software', 'Actualización de sistemas operativos', 'Optimización de rendimiento'])">
+                <div class="service-title">
+                    <i class="fas fa-sync-alt service-icon"></i>
+                    <h3>Actualizaciones</h3>
+                </div>
+                <div class="service-details" id="service-5">
+                    <ul>
+                        <li>Actualización de software</li>
+                        <li>Actualización de sistemas operativos</li>
+                        <li>Optimización de rendimiento</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">📱</div>
-                <h3>Soporte</h3>
-                <p>Asistencia técnica personalizada</p>
+            <div class="service-card" onclick="toggleService(6, 'Soporte', ['Asistencia técnica personalizada', 'Soporte remoto', 'Configuración de redes'])">
+                <div class="service-title">
+                    <i class="fas fa-headset service-icon"></i>
+                    <h3>Soporte</h3>
+                </div>
+                <div class="service-details" id="service-6">
+                    <ul>
+                        <li>Asistencia técnica personalizada</li>
+                        <li>Soporte remoto</li>
+                        <li>Configuración de redes</li>
+                    </ul>
+                </div>
             </div>
         </section>
 
         <section class="contact">
             <h2>¿Necesitas ayuda con tu equipo?</h2>
             <div class="phone">
-                <span class="phone-icon">📞</span>
-                +57 310 650 79 40
+                <span>+57 310 650 79 40</span>
             </div>
-            <a href="tel:+573106507940" class="cta-button">Llamar ahora</a>
+            <a id="whatsapp-link" href="https://wa.me/573106507940?text=Hola,%20necesito%20información%20sobre%20sus%20servicios%20técnicos" 
+               class="whatsapp-button" 
+               target="_blank">
+                <i class="fab fa-whatsapp whatsapp-icon"></i>
+                Contactar por WhatsApp
+            </a>
         </section>
 
         <footer>
             <p>Soluciones tecnológicas profesionales a tu alcance</p>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
         </footer>
+
+        <!-- Botón de "Volver arriba" -->
+        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
     </div>
+
+    <script>
+        function toggleService(id, serviceName, serviceDetails) {
+            const serviceDetailsElement = document.getElementById(`service-${id}`);
+            const serviceCard = serviceDetailsElement.parentElement;
+
+            // Cerrar todos los detalles primero
+            document.querySelectorAll('.service-details').forEach(detail => {
+                if (detail.id !== `service-${id}`) {
+                    detail.style.display = 'none';
+                    detail.parentElement.classList.remove('active');
+                }
+            });
+
+            // Alternar la visibilidad del servicio seleccionado
+            if (serviceDetailsElement.style.display === 'block') {
+                serviceDetailsElement.style.display = 'none';
+                serviceCard.classList.remove('active');
+            } else {
+                serviceDetailsElement.style.display = 'block';
+                serviceCard.classList.add('active');
+            }
+
+            // Actualizar el enlace de WhatsApp con los detalles del servicio seleccionado
+            const whatsappLink = document.getElementById('whatsapp-link');
+            const message = `Hola, estoy interesado en el servicio de *${serviceName}*.\n\nDetalles:\n- ${serviceDetails.join('\n- ')}`;
+            const encodedMessage = encodeURIComponent(message);
+            whatsappLink.href = `https://wa.me/573106507940?text=${encodedMessage}`;
+        }
+
+        // Botón de "Volver arriba"
+        const backToTopButton = document.querySelector('.back-to-top');
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
