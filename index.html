@@ -564,7 +564,20 @@
         }
 
         function requestService(serviceName, serviceDetail) {
-            alert(`Has solicitado el servicio: ${serviceName} - ${serviceDetail}`);
+            // Número de teléfono de WhatsApp
+            const phoneNumber = "573106507940"; // Reemplaza con tu número de teléfono
+
+            // Mensaje predefinido
+            const message = `Hola, estoy interesado en el siguiente servicio:\n\n*Servicio:* ${serviceName}\n*Detalle:* ${serviceDetail}\n\nPor favor, bríndame más información.`;
+
+            // Codifica el mensaje para URL
+            const encodedMessage = encodeURIComponent(message);
+
+            // Construye el enlace de WhatsApp
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            // Redirige al usuario a WhatsApp
+            window.open(whatsappLink, "_blank");
         }
 
         // Función para mostrar el anuncio promocional de Univalle
