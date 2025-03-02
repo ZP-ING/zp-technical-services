@@ -6,7 +6,6 @@
     <title>ZP Technical Services</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* [Estilos anteriores se mantienen igual] */
         * {
             margin: 0;
             padding: 0;
@@ -67,17 +66,23 @@
         }
 
         .services {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             padding: 40px 0;
         }
 
         .service-card {
+            width: 80%;
+            max-width: 600px;
             background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
+            padding: 20px;
             border-radius: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
         .service-card:hover {
@@ -93,6 +98,7 @@
         .service-title {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
             font-size: 1.2em;
         }
@@ -107,16 +113,43 @@
             padding: 10px 0 0 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             margin-top: 10px;
+            text-align: left;
         }
 
         .service-details ul {
             list-style-type: none;
+            padding: 0;
         }
 
         .service-details li {
             margin: 10px 0;
             font-size: 0.95em;
             color: #ccc;
+        }
+
+        .service-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .price {
+            font-size: 1.2em;
+            color: #4fc3f7;
+            margin: 10px 0;
+            font-weight: bold;
         }
 
         .contact {
@@ -187,6 +220,143 @@
             transform: translateY(-5px);
         }
 
+        /* Estilos para el anuncio de Univalle */
+        .promo-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #bf0811; /* Rojo puro de Univalle */
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            display: none;
+            animation: slideDown 0.5s forwards;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .promo-content {
+            display: flex;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        .promo-logo {
+            flex: 0 0 100px;
+            margin-right: 20px;
+        }
+
+        .promo-logo img {
+            max-width: 100px;
+            height: auto;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+        }
+
+        .promo-text {
+            flex: 1;
+            text-align: center;
+        }
+
+        .promo-text h3 {
+            font-size: 1.2em;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .promo-text h2 {
+            font-size: 1.8em;
+            margin: 5px 0;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        .promo-text p {
+            margin: 5px 0;
+            font-size: 1.1em;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .discount {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            display: inline-block;
+            padding: 0 5px;
+            border-radius: 3px;
+            animation: pulse 1.5s infinite;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .valid-period {
+            font-size: 0.9em;
+            background-color: white;
+            color: #bf0811;
+            padding: 3px 8px;
+            border-radius: 3px;
+            display: inline-block;
+            font-weight: bold;
+            margin-top: 5px !important;
+            text-shadow: none;
+        }
+
+        .promo-button {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 8px 15px;
+            margin-top: 10px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .promo-button:hover {
+            background-color: #128C7E;
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .close-promo {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-promo:hover {
+            background: rgba(0, 0, 0, 0.5);
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
@@ -197,10 +367,49 @@
             .phone {
                 font-size: 2em;
             }
+            .service-card {
+                width: 90%;
+            }
+            .promo-content {
+                flex-direction: column;
+                padding: 10px;
+            }
+            
+            .promo-logo {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .promo-text h2 {
+                font-size: 1.4em;
+            }
+            
+            .promo-text p {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Anuncio de Univalle que reemplaza al anuncio existente -->
+    <div id="univalle-promo" class="promo-banner">
+        <div class="promo-content">
+            <div class="promo-logo">
+                <img src="https://www.univalle.edu.co/images/logo.png" alt="Logo Universidad del Valle">
+            </div>
+            <div class="promo-text">
+                <h3>¡OFERTA ESPECIAL!</h3>
+                <h2>COMUNIDAD UNIVERSITARIA DE UNIVALLE</h2>
+                <p>RECIBE UN DESCUENTO DE <span class="discount">$10,000 COP</span> EN TODOS LOS SERVICIOS</p>
+                <p class="valid-period">VÁLIDO SOLO DURANTE LA PRIMERA SEMANA DEL MES</p>
+                <a href="https://wa.me/573106507940?text=Hola,%20soy%20de%20la%20comunidad%20Univalle%20y%20quiero%20información%20sobre%20el%20descuento%20especial" class="promo-button" target="_blank">
+                    <i class="fab fa-whatsapp"></i> SOLICITAR DESCUENTO
+                </a>
+            </div>
+        </div>
+        <button class="close-promo" onclick="closePromo()">×</button>
+    </div>
+
     <div class="container">
         <header>
             <div class="logo-container">
@@ -210,152 +419,185 @@
         </header>
 
         <section class="services">
-            <div class="service-card" onclick="toggleService(1, 'Windows', ['Instalación de sistema operativo Windows', 'Formateo de Windows', 'Activación de Windows'])">
+            <!-- Servicio de Windows -->
+            <div class="service-card" onclick="toggleService(1, 'Windows')">
                 <div class="service-title">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" alt="Windows" class="service-icon">
                     <h3>Windows</h3>
                 </div>
                 <div class="service-details" id="service-1">
-                    <ul>
-                        <li>Instalación de sistema operativo Windows</li>
-                        <li>Formateo de Windows</li>
-                        <li>Activación de Windows</li>
-                    </ul>
+                    <button class="service-button" onclick="requestService('Windows', 'Instalación de sistema operativo Windows - $55,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" alt="Windows" class="service-icon">
+                        Instalación de sistema operativo Windows - <span class="price">$55,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Windows', 'Formateo de PC - $35,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" alt="Windows" class="service-icon">
+                        Formateo de PC - <span class="price">$35,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Windows', 'Activación de Windows - $35,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" alt="Windows" class="service-icon">
+                        Activación de Windows - <span class="price">$35,000 COP</span>
+                    </button>
                 </div>
             </div>
 
-            <div class="service-card" onclick="toggleService(2, 'Microsoft Office', ['Instalación de Office (Word, Excel, PowerPoint)', 'Activación de Office', 'Solución de problemas de licencias'])">
+            <!-- Servicio de Office -->
+            <div class="service-card" onclick="toggleService(2, 'Microsoft Office')">
                 <div class="service-title">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Microsoft Office" class="service-icon">
                     <h3>Microsoft Office</h3>
                 </div>
                 <div class="service-details" id="service-2">
-                    <ul>
-                        <li>Instalación de Office (Word, Excel, PowerPoint)</li>
-                        <li>Activación de Office</li>
-                        <li>Solución de problemas de licencias</li>
-                    </ul>
+                    <button class="service-button" onclick="requestService('Microsoft Office', 'Instalación de PowerPoint - $20,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Office" class="service-icon">
+                        Instalación de PowerPoint - <span class="price">$20,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Microsoft Office', 'Instalación de Excel - $20,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Office" class="service-icon">
+                        Instalación de Excel - <span class="price">$20,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Microsoft Office', 'Instalación de Word - $20,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Office" class="service-icon">
+                        Instalación de Word - <span class="price">$20,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Microsoft Office', 'Instalación de Office (Word, Excel, PowerPoint) - $55,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Office" class="service-icon">
+                        Instalación de Office (Word, Excel, PowerPoint) - <span class="price">$55,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Microsoft Office', 'Activación de Office - $35,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Office" class="service-icon">
+                        Activación de Office - <span class="price">$35,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Microsoft Office', 'Solución de problemas de licencias - $25,000 COP')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Office" class="service-icon">
+                        Solución de problemas de licencias - <span class="price">$25,000 COP</span>
+                    </button>
                 </div>
             </div>
 
-            <div class="service-card" onclick="toggleService(3, 'Mantenimiento', ['Mantenimiento preventivo', 'Mantenimiento correctivo', 'Diagnóstico de hardware y software'])">
+            <!-- Servicio de Mantenimiento -->
+            <div class="service-card" onclick="toggleService(3, 'Mantenimiento')">
                 <div class="service-title">
                     <i class="fas fa-tools service-icon"></i>
                     <h3>Mantenimiento</h3>
                 </div>
                 <div class="service-details" id="service-3">
-                    <ul>
-                        <li>Mantenimiento preventivo</li>
-                        <li>Mantenimiento correctivo</li>
-                        <li>Diagnóstico de hardware y software</li>
-                    </ul>
+                    <button class="service-button" onclick="requestService('Mantenimiento', 'Mantenimiento preventivo - $50,000 COP')">
+                        <i class="fas fa-tools service-icon"></i>
+                        Mantenimiento preventivo - <span class="price">$50,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Mantenimiento', 'Mantenimiento correctivo - $70,000 COP')">
+                        <i class="fas fa-tools service-icon"></i>
+                        Mantenimiento correctivo - <span class="price">$70,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Mantenimiento', 'Diagnóstico de hardware y software - $30,000 COP')">
+                        <i class="fas fa-tools service-icon"></i>
+                        Diagnóstico de hardware y software - <span class="price">$30,000 COP</span>
+                    </button>
                 </div>
             </div>
 
-            <div class="service-card" onclick="toggleService(4, 'Limpieza', ['Limpieza del equipo por aire y líquida', 'Cambio de pasta térmica', 'Limpieza completa de hardware'])">
+            <!-- Servicio de Limpieza -->
+            <div class="service-card" onclick="toggleService(4, 'Limpieza')">
                 <div class="service-title">
                     <i class="fas fa-broom service-icon"></i>
                     <h3>Limpieza</h3>
                 </div>
                 <div class="service-details" id="service-4">
-                    <ul>
-                        <li>Limpieza del equipo por aire y líquida</li>
-                        <li>Cambio de pasta térmica</li>
-                        <li>Limpieza completa de hardware</li>
-                    </ul>
+                    <button class="service-button" onclick="requestService('Limpieza', 'Limpieza del equipo - $40,000 COP')">
+                        <i class="fas fa-broom service-icon"></i>
+                        Limpieza del equipo - <span class="price">$40,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Limpieza', 'Cambio de pasta térmica - $30,000 COP')">
+                        <i class="fas fa-broom service-icon"></i>
+                        Cambio de pasta térmica - <span class="price">$30,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Limpieza', 'Limpieza completa de hardware - $75,000 COP')">
+                        <i class="fas fa-broom service-icon"></i>
+                        Limpieza completa de hardware - <span class="price">$75,000 COP</span>
+                    </button>
                 </div>
             </div>
 
-            <div class="service-card" onclick="toggleService(5, 'Actualizaciones', ['Actualización de software', 'Actualización de sistemas operativos', 'Optimización de rendimiento'])">
+            <!-- Servicio de Actualizaciones -->
+            <div class="service-card" onclick="toggleService(5, 'Actualización')">
                 <div class="service-title">
-                    <i class="fas fa-sync-alt service-icon"></i>
-                    <h3>Actualizaciones</h3>
+                    <i class="fas fa-arrow-up service-icon"></i>
+                    <h3>Actualización</h3>
                 </div>
                 <div class="service-details" id="service-5">
-                    <ul>
-                        <li>Actualización de software</li>
-                        <li>Actualización de sistemas operativos</li>
-                        <li>Optimización de rendimiento</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="service-card" onclick="toggleService(6, 'Soporte', ['Asistencia técnica personalizada', 'Soporte remoto', 'Configuración de redes'])">
-                <div class="service-title">
-                    <i class="fas fa-headset service-icon"></i>
-                    <h3>Soporte</h3>
-                </div>
-                <div class="service-details" id="service-6">
-                    <ul>
-                        <li>Asistencia técnica personalizada</li>
-                        <li>Soporte remoto</li>
-                        <li>Configuración de redes</li>
-                    </ul>
+                    <button class="service-button" onclick="requestService('Actualización', 'Actualización de sistema operativo - $50,000 COP')">
+                        <i class="fas fa-arrow-up service-icon"></i>
+                        Actualización de sistema operativo - <span class="price">$50,000 COP</span>
+                    </button>
+                    <button class="service-button" onclick="requestService('Actualización', 'Actualización de hardware - $60,000 COP')">
+                        <i class="fas fa-arrow-up service-icon"></i>
+                        Actualización de hardware - <span class="price">$60,000 COP</span>
+                    </button>
                 </div>
             </div>
         </section>
 
         <section class="contact">
-            <h2>¿Necesitas ayuda con tu equipo?</h2>
             <div class="phone">
-                <span>+57 310 650 79 40</span>
+                <i class="fas fa-phone-alt"></i> +57 3106507940
             </div>
-            <a id="whatsapp-link" href="https://wa.me/573106507940?text=Hola,%20necesito%20información%20sobre%20sus%20servicios%20técnicos" 
-               class="whatsapp-button" 
-               target="_blank">
-                <i class="fab fa-whatsapp whatsapp-icon"></i>
-                Contactar por WhatsApp
+            <a href="https://wa.me/573106507940" class="whatsapp-button">
+                <span class="whatsapp-icon"><i class="fab fa-whatsapp"></i></span> Contáctanos por WhatsApp
             </a>
         </section>
-
-        <footer>
-            <p>Soluciones tecnológicas profesionales a tu alcance</p>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-            </div>
-        </footer>
-
-        <!-- Botón de "Volver arriba" -->
-        <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
     </div>
 
+    <footer>
+        <div>&copy; 2025 ZP Technical Services</div>
+    </footer>
+
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
     <script>
-        function toggleService(id, serviceName, serviceDetails) {
-            const serviceDetailsElement = document.getElementById(`service-${id}`);
-            const serviceCard = serviceDetailsElement.parentElement;
-
-            // Cerrar todos los detalles primero
-            document.querySelectorAll('.service-details').forEach(detail => {
-                if (detail.id !== `service-${id}`) {
-                    detail.style.display = 'none';
-                    detail.parentElement.classList.remove('active');
-                }
-            });
-
-            // Alternar la visibilidad del servicio seleccionado
-            if (serviceDetailsElement.style.display === 'block') {
-                serviceDetailsElement.style.display = 'none';
-                serviceCard.classList.remove('active');
-            } else {
-                serviceDetailsElement.style.display = 'block';
-                serviceCard.classList.add('active');
-            }
-
-            // Actualizar el enlace de WhatsApp con los detalles del servicio seleccionado
-            const whatsappLink = document.getElementById('whatsapp-link');
-            const message = `Hola, estoy interesado en el servicio de *${serviceName}*.\n\nDetalles:\n- ${serviceDetails.join('\n- ')}`;
-            const encodedMessage = encodeURIComponent(message);
-            whatsappLink.href = `https://wa.me/573106507940?text=${encodedMessage}`;
+        function toggleService(serviceId, serviceName) {
+            const details = document.getElementById(`service-${serviceId}`);
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => card.classList.remove('active'));
+            details.style.display = details.style.display === 'block' ? 'none' : 'block';
+            document.querySelector(`.service-card:nth-child(${serviceId})`).classList.toggle('active');
         }
 
-        // Botón de "Volver arriba"
-        const backToTopButton = document.querySelector('.back-to-top');
-        backToTopButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        function requestService(serviceName, serviceDetail) {
+            alert(`Has solicitado el servicio: ${serviceName} - ${serviceDetail}`);
+        }
+
+        // Función para mostrar el anuncio promocional de Univalle
+        function showPromoMonthly() {
+            const now = new Date();
+            const day = now.getDate();
+            const isFirstWeek = day <= 7;
+
+            const lastShown = localStorage.getItem('lastPromoShown');
+            if (lastShown) {
+                const lastDate = new Date(lastShown);
+                const lastMonth = lastDate.getMonth();
+                const lastYear = lastDate.getFullYear();
+                const currentMonth = now.getMonth();
+                const currentYear = now.getFullYear();
+
+                if ((currentMonth !== lastMonth || currentYear !== lastYear) && isFirstWeek) {
+                    document.getElementById('univalle-promo').style.display = 'block';
+                    localStorage.setItem('lastPromoShown', now.toString());
+                }
+            } else if (isFirstWeek) {
+                document.getElementById('univalle-promo').style.display = 'block';
+                localStorage.setItem('lastPromoShown', now.toString());
+            }
+        }
+
+        // Función para cerrar el anuncio
+        function closePromo() {
+            document.getElementById('univalle-promo').style.display = 'none';
+        }
+
+        // Ejecutar cuando la página se carga
+        window.addEventListener('DOMContentLoaded', showPromoMonthly);
     </script>
 </body>
 </html>
