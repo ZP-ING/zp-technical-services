@@ -580,37 +580,29 @@
             window.open(whatsappLink, "_blank");
         }
 
-        // Función para mostrar el anuncio promocional de Univalle
-        function showPromoMonthly() {
-            const now = new Date();
-            const day = now.getDate();
-            const isFirstWeek = day <= 7;
+        // Función para mostrar el anuncio
+        function showPromo() {
+            const promoBanner = document.getElementById('univalle-promo');
+            promoBanner.style.display = 'block'; // Muestra el anuncio
 
-            const lastShown = localStorage.getItem('lastPromoShown');
-            if (lastShown) {
-                const lastDate = new Date(lastShown);
-                const lastMonth = lastDate.getMonth();
-                const lastYear = lastDate.getFullYear();
-                const currentMonth = now.getMonth();
-                const currentYear = now.getFullYear();
-
-                if ((currentMonth !== lastMonth || currentYear !== lastYear) && isFirstWeek) {
-                    document.getElementById('univalle-promo').style.display = 'block';
-                    localStorage.setItem('lastPromoShown', now.toString());
-                }
-            } else if (isFirstWeek) {
-                document.getElementById('univalle-promo').style.display = 'block';
-                localStorage.setItem('lastPromoShown', now.toString());
-            }
+            // Oculta el anuncio después de 20 segundos
+            setTimeout(() => {
+                promoBanner.style.display = 'none';
+            }, 20000); // 20 segundos
         }
 
-        // Función para cerrar el anuncio
+        // Función para cerrar el anuncio manualmente
         function closePromo() {
             document.getElementById('univalle-promo').style.display = 'none';
         }
 
+        // Mostrar el anuncio cada 30 segundos
+        setInterval(showPromo, 30000); // 30 segundos
+
         // Ejecutar cuando la página se carga
-        window.addEventListener('DOMContentLoaded', showPromoMonthly);
+        window.addEventListener('DOMContentLoaded', () => {
+            showPromo(); // Mostrar el anuncio al cargar la página
+        });
     </script>
 </body>
 </html>
