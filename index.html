@@ -44,27 +44,59 @@
             border-radius: 20px;
             background: rgba(255, 255, 255, 0.1);
             margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            width: 150px;
+            height: 150px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
         }
 
         .logo {
-            font-size: 6em;
+            font-size: 5em;
             font-weight: bold;
             color: white;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 0, 0, 0.5);
             letter-spacing: 5px;
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: inline-block;
+            z-index: 2;
         }
 
-        .logo::after {
-            content: '';
+        .logo-bg {
             position: absolute;
-            bottom: -10px;
+            top: 0;
             left: 0;
             width: 100%;
-            height: 4px;
-            background: white;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            height: 100%;
+            background: radial-gradient(circle, rgba(255, 0, 0, 0.7), rgba(139, 0, 0, 0.9));
+            z-index: 1;
+            border-radius: 15px;
+        }
+
+        .logo-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            z-index: 3;
+        }
+
+        @keyframes shine {
+            0% {
+                top: -50%;
+                left: -50%;
+            }
+            100% {
+                top: 150%;
+                left: 150%;
+            }
         }
 
         .subtitle {
@@ -472,10 +504,31 @@
             text-align: center;
         }
 
+        .login-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
         .login-title {
             color: #FF0000;
-            margin-bottom: 20px;
             font-size: 1.5em;
+            margin: 0;
+        }
+
+        .close-login {
+            background: #FF0000;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .login-input {
@@ -510,6 +563,24 @@
         }
 
         /* Estilos para la sección de comentarios */
+        .comments-page {
+            display: none;
+            min-height: 100vh;
+            background: #f9f9f9;
+            padding: 40px 0;
+        }
+
+        .comments-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .comments-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
         .comments-section {
             width: 80%;
             max-width: 800px;
@@ -561,6 +632,13 @@
         .comment-text {
             color: #444;
             line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .comment-rating {
+            color: #FFD700;
+            font-size: 1.2em;
+            margin-top: 5px;
         }
 
         .add-comment-section {
@@ -583,6 +661,39 @@
             margin-bottom: 15px;
             resize: vertical;
             min-height: 100px;
+        }
+
+        .rating-select {
+            margin-bottom: 15px;
+        }
+
+        .rating-select label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .stars {
+            display: inline-flex;
+            flex-direction: row-reverse;
+            gap: 5px;
+        }
+
+        .stars input {
+            display: none;
+        }
+
+        .stars label {
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #ddd;
+            transition: color 0.2s;
+        }
+
+        .stars label:hover,
+        .stars label:hover ~ label,
+        .stars input:checked ~ label {
+            color: #FFD700;
         }
 
         .comment-form button {
@@ -731,163 +842,190 @@
         <button class="close-promo" onclick="closePromo()">×</button>
     </div>
 
-    <div class="container">
-        <header>
-            <div class="logo-container">
-                <div class="logo">ZP</div>
-            </div>
-            <div class="subtitle">Technical Services</div>
-        </header>
+    <!-- Página principal (servicios) -->
+    <div id="services-page" class="main-page">
+        <div class="container">
+            <header>
+                <div class="logo-container">
+                    <div class="logo-bg"></div>
+                    <div class="logo">ZP</div>
+                    <div class="logo-shine"></div>
+                </div>
+                <div class="subtitle">Technical Services</div>
+            </header>
 
-        <section class="services">
-            <!-- Servicio de Windows -->
-            <div class="service-card" onclick="toggleService(1, 'Windows')">
-                <div class="service-title">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" alt="Windows" class="service-icon">
-                    <h3>Windows</h3>
+            <section class="services">
+                <!-- Servicio de Windows -->
+                <div class="service-card" onclick="toggleService(1, 'Windows')">
+                    <div class="service-title">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Windows_logo_-_2021.svg" alt="Windows" class="service-icon">
+                        <h3>Windows</h3>
+                    </div>
+                    <div class="service-details" id="service-1">
+                        <button class="service-button" onclick="redirectToWhatsApp('Windows', 'Instalación de sistema operativo', 'windows-os')">
+                            Instalación de sistema operativo - <span class="price" id="windows-os">$55,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Windows', 'Formateo de PC', 'windows-format')">
+                            Formateo de PC - <span class="price" id="windows-format">$35,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Windows', 'Activación de Windows', 'windows-activation')">
+                            Activación de Windows - <span class="price" id="windows-activation">$35,000 COP</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="service-details" id="service-1">
-                    <button class="service-button" onclick="redirectToWhatsApp('Windows', 'Instalación de sistema operativo', 'windows-os')">
-                        Instalación de sistema operativo - <span class="price" id="windows-os">$55,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Windows', 'Formateo de PC', 'windows-format')">
-                        Formateo de PC - <span class="price" id="windows-format">$35,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Windows', 'Activación de Windows', 'windows-activation')">
-                        Activación de Windows - <span class="price" id="windows-activation">$35,000 COP</span>
-                    </button>
+
+                <!-- Servicio de Office -->
+                <div class="service-card" onclick="toggleService(2, 'Microsoft Office')">
+                    <div class="service-title">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Microsoft Office" class="service-icon">
+                        <h3>Microsoft Office</h3>
+                    </div>
+                    <div class="service-details" id="service-2">
+                        <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Instalación de PowerPoint', 'office-powerpoint')">
+                            Instalación de PowerPoint - <span class="price" id="office-powerpoint">$20,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Instalación de Excel', 'office-excel')">
+                            Instalación de Excel - <span class="price" id="office-excel">$20,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Instalación de Word', 'office-word')">
+                            Instalación de Word - <span class="price" id="office-word">$20,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Instalación de paquete Office (Word, Excel, PowerPoint)', 'office-full')">
+                            Instalación de paquete Office (Word, Excel, PowerPoint) - <span class="price" id="office-full">$55,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Activación de Office', 'office-activation')">
+                            Activación de Office - <span class="price" id="office-activation">$35,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Solución de problemas de licencias', 'office-license')">
+                            Solución de problemas de licencias - <span class="price" id="office-license">$25,000 COP</span>
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Servicio de Mantenimiento -->
+                <div class="service-card" onclick="toggleService(3, 'Mantenimiento')">
+                    <div class="service-title">
+                        <i class="fas fa-tools service-icon"></i>
+                        <h3>Mantenimiento</h3>
+                    </div>
+                    <div class="service-details" id="service-3">
+                        <button class="service-button" onclick="redirectToWhatsApp('Mantenimiento', 'Mantenimiento preventivo', 'maintenance-preventive')">
+                            Mantenimiento preventivo - <span class="price" id="maintenance-preventive">$50,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Mantenimiento', 'Mantenimiento correctivo', 'maintenance-corrective')">
+                            Mantenimiento correctivo - <span class="price" id="maintenance-corrective">$70,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Mantenimiento', 'Diagnóstico de hardware y software', 'maintenance-diagnostic')">
+                            Diagnóstico de hardware y software - <span class="price" id="maintenance-diagnostic">$30,000 COP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Servicio de Limpieza -->
+                <div class="service-card" onclick="toggleService(4, 'Limpieza')">
+                    <div class="service-title">
+                        <i class="fas fa-broom service-icon"></i>
+                        <h3>Limpieza</h3>
+                    </div>
+                    <div class="service-details" id="service-4">
+                        <button class="service-button" onclick="redirectToWhatsApp('Limpieza', 'Limpieza de software', 'cleaning-basic')">
+                            Limpieza de software - <span class="price" id="cleaning-basic">$40,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Limpieza', 'Cambio de pasta térmica', 'cleaning-thermal')">
+                            Cambio de pasta térmica - <span class="price" id="cleaning-thermal">$30,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Limpieza', 'Limpieza completa de hardware', 'cleaning-full')">
+                            Limpieza completa de hardware - <span class="price" id="cleaning-full">$75,000 COP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Servicio de Actualizaciones -->
+                <div class="service-card" onclick="toggleService(5, 'Actualización')">
+                    <div class="service-title">
+                        <i class="fas fa-arrow-up service-icon"></i>
+                        <h3>Actualización</h3>
+                    </div>
+                    <div class="service-details" id="service-5">
+                        <button class="service-button" onclick="redirectToWhatsApp('Actualización', 'Actualización de software', 'update-os')">
+                            Actualización de software - <span class="price" id="update-os">$50,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Actualización', 'Actualización de hardware', 'update-hardware')">
+                            Actualización de hardware - <span class="price" id="update-hardware">$60,000 COP</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <a href="#" class="back-button" onclick="showCommentsPage()">Ver Comentarios de Clientes</a>
+
+            <section class="contact">
+                <div class="phone">
+                    <i class="fas fa-phone-alt"></i> Llámanos al +57 3106507940
+                </div>
+                <a href="https://wa.me/573106507940" class="whatsapp-button">
+                    <span class="whatsapp-icon"><i class="fab fa-whatsapp"></i></span> Contáctanos por WhatsApp
+                </a>
+            </section>
+        </div>
+    </div>
+
+    <!-- Página de comentarios -->
+    <div id="comments-page" class="comments-page">
+        <div class="comments-container">
+            <div class="comments-header">
+                <h1 style="color: #FF0000; margin-bottom: 20px;">Experiencias de Nuestros Clientes</h1>
+                <a href="#" class="back-button" onclick="showServicesPage()">Volver a Servicios</a>
             </div>
 
-            <!-- Servicio de Office -->
-            <div class="service-card" onclick="toggleService(2, 'Microsoft Office')">
-                <div class="service-title">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Microsoft Office" class="service-icon">
-                    <h3>Microsoft Office</h3>
-                </div>
-                <div class="service-details" id="service-2">
-                    <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Instalación de PowerPoint', 'office-powerpoint')">
-                        Instalación de PowerPoint - <span class="price" id="office-powerpoint">$20,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Instalación de Excel', 'office-excel')">
-                        Instalación de Excel - <span class="price" id="office-excel">$20,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Instalación de Word', 'office-word')">
-                        Instalación de Word - <span class="price" id="office-word">$20,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Instalación de paquete Office (Word, Excel, PowerPoint)', 'office-full')">
-                        Instalación de paquete Office (Word, Excel, PowerPoint) - <span class="price" id="office-full">$55,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Activación de Office', 'office-activation')">
-                        Activación de Office - <span class="price" id="office-activation">$35,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Microsoft Office', 'Solución de problemas de licencias', 'office-license')">
-                        Solución de problemas de licencias - <span class="price" id="office-license">$25,000 COP</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Servicio de Mantenimiento -->
-            <div class="service-card" onclick="toggleService(3, 'Mantenimiento')">
-                <div class="service-title">
-                    <i class="fas fa-tools service-icon"></i>
-                    <h3>Mantenimiento</h3>
-                </div>
-                <div class="service-details" id="service-3">
-                    <button class="service-button" onclick="redirectToWhatsApp('Mantenimiento', 'Mantenimiento preventivo', 'maintenance-preventive')">
-                        Mantenimiento preventivo - <span class="price" id="maintenance-preventive">$50,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Mantenimiento', 'Mantenimiento correctivo', 'maintenance-corrective')">
-                        Mantenimiento correctivo - <span class="price" id="maintenance-corrective">$70,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Mantenimiento', 'Diagnóstico de hardware y software', 'maintenance-diagnostic')">
-                        Diagnóstico de hardware y software - <span class="price" id="maintenance-diagnostic">$30,000 COP</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Servicio de Limpieza -->
-            <div class="service-card" onclick="toggleService(4, 'Limpieza')">
-                <div class="service-title">
-                    <i class="fas fa-broom service-icon"></i>
-                    <h3>Limpieza</h3>
-                </div>
-                <div class="service-details" id="service-4">
-                    <button class="service-button" onclick="redirectToWhatsApp('Limpieza', 'Limpieza de software', 'cleaning-basic')">
-                        Limpieza de software - <span class="price" id="cleaning-basic">$40,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Limpieza', 'Cambio de pasta térmica', 'cleaning-thermal')">
-                        Cambio de pasta térmica - <span class="price" id="cleaning-thermal">$30,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Limpieza', 'Limpieza completa de hardware', 'cleaning-full')">
-                        Limpieza completa de hardware - <span class="price" id="cleaning-full">$75,000 COP</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Servicio de Actualizaciones -->
-            <div class="service-card" onclick="toggleService(5, 'Actualización')">
-                <div class="service-title">
-                    <i class="fas fa-arrow-up service-icon"></i>
-                    <h3>Actualización</h3>
-                </div>
-                <div class="service-details" id="service-5">
-                    <button class="service-button" onclick="redirectToWhatsApp('Actualización', 'Actualización de software', 'update-os')">
-                        Actualización de software - <span class="price" id="update-os">$50,000 COP</span>
-                    </button>
-                    <button class="service-button" onclick="redirectToWhatsApp('Actualización', 'Actualización de hardware', 'update-hardware')">
-                        Actualización de hardware - <span class="price" id="update-hardware">$60,000 COP</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <a href="#comments" class="back-button">Ver Comentarios de Clientes</a>
-
-        <!-- Sección de Comentarios -->
-        <section id="comments" class="comments-section">
-            <h2 class="comments-title">Experiencias de Nuestros Clientes</h2>
-            
-            <div class="comments-list" id="comments-list">
-                <div class="no-comments" id="no-comments">
-                    Aún no hay comentarios. ¡Sé el primero en compartir tu experiencia!
-                </div>
-                <!-- Los comentarios se cargarán aquí dinámicamente -->
-            </div>
-            
-            <div class="add-comment-section">
-                <h3 class="add-comment-title">Comparte tu Experiencia</h3>
+            <section class="comments-section">
+                <h2 class="comments-title">Comentarios y Valoraciones</h2>
                 
-                <div class="user-info" id="user-info">
-                    Comentando como: <span id="user-email"></span>
-                    <button class="logout-button" onclick="logoutUser()">Cerrar Sesión</button>
+                <div class="comments-list" id="comments-list">
+                    <div class="no-comments" id="no-comments">
+                        Aún no hay comentarios. ¡Sé el primero en compartir tu experiencia!
+                    </div>
+                    <!-- Los comentarios se cargarán aquí dinámicamente -->
                 </div>
                 
-                <div class="user-login-section" id="user-login-section">
-                    <p>Para dejar un comentario, por favor inicia sesión con tu correo electrónico:</p>
-                    <form class="user-login-form" id="user-login-form" onsubmit="loginUser(event)">
-                        <input type="email" id="user-email-input" placeholder="Correo electrónico" required>
-                        <button type="submit">Iniciar Sesión</button>
+                <div class="add-comment-section">
+                    <h3 class="add-comment-title">Comparte tu Experiencia</h3>
+                    
+                    <div class="user-info" id="user-info">
+                        Comentando como: <span id="user-email"></span>
+                        <button class="logout-button" onclick="logoutUser()">Cerrar Sesión</button>
+                    </div>
+                    
+                    <div class="user-login-section" id="user-login-section">
+                        <p>Para dejar un comentario, por favor inicia sesión con tu correo electrónico:</p>
+                        <form class="user-login-form" id="user-login-form" onsubmit="loginUser(event)">
+                            <input type="email" id="user-email-input" placeholder="Correo electrónico" required>
+                            <button type="submit">Iniciar Sesión</button>
+                        </form>
+                    </div>
+                    
+                    <form class="comment-form" id="comment-form" style="display: none;" onsubmit="addComment(event)">
+                        <div class="rating-select">
+                            <label>Tu valoración:</label>
+                            <div class="stars">
+                                <input type="radio" id="star5" name="rating" value="5" required>
+                                <label for="star5" title="5 estrellas"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star4" name="rating" value="4">
+                                <label for="star4" title="4 estrellas"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star3" name="rating" value="3">
+                                <label for="star3" title="3 estrellas"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star2" name="rating" value="2">
+                                <label for="star2" title="2 estrellas"><i class="fas fa-star"></i></label>
+                                <input type="radio" id="star1" name="rating" value="1">
+                                <label for="star1" title="1 estrella"><i class="fas fa-star"></i></label>
+                            </div>
+                        </div>
+                        <textarea id="comment-text" placeholder="Escribe tu comentario aquí..." required></textarea>
+                        <button type="submit">Publicar Comentario</button>
                     </form>
                 </div>
-                
-                <form class="comment-form" id="comment-form" style="display: none;" onsubmit="addComment(event)">
-                    <textarea id="comment-text" placeholder="Escribe tu comentario aquí..." required></textarea>
-                    <button type="submit">Publicar Comentario</button>
-                </form>
-            </div>
-            
-            <a href="#services" class="back-button">Volver a Servicios</a>
-        </section>
-
-        <section class="contact">
-            <div class="phone">
-                <i class="fas fa-phone-alt"></i> Llámanos al +57 3106507940
-            </div>
-            <a href="https://wa.me/573106507940" class="whatsapp-button">
-                <span class="whatsapp-icon"><i class="fab fa-whatsapp"></i></span> Contáctanos por WhatsApp
-            </a>
-        </section>
+            </section>
+        </div>
     </div>
 
     <footer>
@@ -899,7 +1037,10 @@
 
     <!-- Panel de Login para Administrador -->
     <div class="login-panel" id="login-panel">
-        <h2 class="login-title">Acceso Administrativo</h2>
+        <div class="login-header">
+            <h2 class="login-title">Acceso Administrativo</h2>
+            <button class="close-login" onclick="closeLoginPanel()">×</button>
+        </div>
         <input type="text" id="admin-username" class="login-input" placeholder="Usuario">
         <input type="password" id="admin-password" class="login-input" placeholder="Contraseña">
         <button class="login-button" onclick="validateLogin()">Iniciar Sesión</button>
@@ -1047,6 +1188,12 @@
             document.getElementById('admin-password').value = '';
         }
 
+        // Cerrar panel de login
+        function closeLoginPanel() {
+            document.getElementById('login-panel').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
         // Validar credenciales de administrador
         function validateLogin() {
             const username = document.getElementById('admin-username').value;
@@ -1158,6 +1305,19 @@
         // Mostrar el anuncio cada 30 segundos
         setInterval(showPromo, 30000); // 30 segundos
 
+        // Funciones para cambiar entre páginas
+        function showCommentsPage() {
+            document.getElementById('services-page').style.display = 'none';
+            document.getElementById('comments-page').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function showServicesPage() {
+            document.getElementById('comments-page').style.display = 'none';
+            document.getElementById('services-page').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
         // Funciones para la sección de comentarios
         let userEmail = null;
         
@@ -1177,11 +1337,24 @@
                     comments.forEach(comment => {
                         const commentElement = document.createElement('div');
                         commentElement.className = 'comment';
+                        
+                        // Generar estrellas HTML basado en la valoración
+                        let starsHTML = '';
+                        const rating = comment.rating || 5; // Default a 5 si no hay valoración
+                        for (let i = 1; i <= 5; i++) {
+                            if (i <= rating) {
+                                starsHTML += '<i class="fas fa-star"></i>';
+                            } else {
+                                starsHTML += '<i class="far fa-star"></i>';
+                            }
+                        }
+                        
                         commentElement.innerHTML = `
                             <div class="comment-header">
                                 <span class="comment-author">${comment.email}</span>
                                 <span class="comment-date">${comment.date}</span>
                             </div>
+                            <div class="comment-rating">${starsHTML}</div>
                             <div class="comment-text">${comment.text}</div>
                         `;
                         commentsList.appendChild(commentElement);
@@ -1233,10 +1406,22 @@
                 return;
             }
             
+            // Obtener la valoración seleccionada
+            const ratingInputs = document.getElementsByName('rating');
+            let rating = 5; // Valor por defecto
+            
+            for (const input of ratingInputs) {
+                if (input.checked) {
+                    rating = parseInt(input.value);
+                    break;
+                }
+            }
+            
             // Crear objeto de comentario
             const comment = {
                 email: userEmail,
                 text: commentText,
+                rating: rating,
                 date: new Date().toLocaleDateString('es-ES', {
                     year: 'numeric',
                     month: 'long',
@@ -1259,6 +1444,7 @@
             
             // Limpiar formulario
             document.getElementById('comment-text').value = '';
+            document.getElementById('star5').checked = true; // Resetear a 5 estrellas
             
             // Recargar comentarios
             loadComments();
