@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ZP Technical Services ofrece servicios técnicos especializados en Windows, Microsoft Office, mantenimiento, limpieza y actualizaciones de hardware y software.">
-    <meta name="keywords" content="servicios técnicos, Windows, Microsoft Office, mantenimiento, limpieza, actualizaciones, ZP Technical Services">
-    <meta name="author" content="ZP Technical Services">
-    <title>ZP Technical Services</title>
+    <meta name="description" content="ZP Servicio Técnico ofrece servicios especializados en Windows, Microsoft Office, mantenimiento, limpieza, actualizaciones, ensamblado y optimización de rendimiento.">
+    <meta name="keywords" content="servicios técnicos, Windows, Microsoft Office, mantenimiento, limpieza, actualizaciones, ensamblado, rendimiento, ZP Servicio Técnico">
+    <meta name="author" content="ZP Servicio Técnico">
+    <title>ZP Servicio Técnico</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         * {
@@ -36,19 +36,29 @@
             border-radius: 0 0 50% 50% / 0 0 20% 20%;
             margin-bottom: 40px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .logo-container {
-            display: inline-block;
-            padding: 30px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            margin-bottom: 20px;
             position: relative;
             overflow: hidden;
-            width: 150px;
+        }
+
+        /* Nuevo diseño del logo */
+        .logo-container {
+            display: inline-block;
+            position: relative;
+            margin-bottom: 20px;
+            z-index: 10;
+        }
+
+        .logo-background {
+            position: absolute;
+            width: 300px;
             height: 150px;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 0, 0, 0.8);
+            border-radius: 15px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1;
         }
 
         .logo {
@@ -57,23 +67,69 @@
             color: white;
             text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 40px rgba(255, 0, 0, 0.5);
             letter-spacing: 5px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: relative;
             display: inline-block;
-            z-index: 2;
+            z-index: 5;
+            padding: 20px 30px;
         }
 
-        .logo-bg {
+        .logo-tech-bg {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(255, 0, 0, 0.7), rgba(139, 0, 0, 0.9));
-            z-index: 1;
-            border-radius: 15px;
+            z-index: 2;
+            opacity: 0.4;
+            background: 
+                linear-gradient(45deg, transparent 48%, rgba(255, 255, 255, 0.5) 50%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, rgba(255, 255, 255, 0.5) 50%, transparent 52%);
+            background-size: 30px 30px;
+        }
+
+        .logo-circuit {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+            opacity: 0.6;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 1px, transparent 2px),
+                radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.4) 1px, transparent 2px),
+                radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.4) 1px, transparent 2px),
+                radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.4) 1px, transparent 2px),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 1px, transparent 2px);
+            background-size: 30px 30px;
+        }
+
+        .logo-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255, 0, 0, 0.3);
+            z-index: 4;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.7;
+            }
         }
 
         .logo-shine {
@@ -85,7 +141,7 @@
             background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transform: rotate(45deg);
             animation: shine 3s infinite;
-            z-index: 3;
+            z-index: 6;
         }
 
         @keyframes shine {
@@ -104,6 +160,8 @@
             margin-top: 20px;
             color: rgba(255, 255, 255, 0.9);
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 5;
         }
 
         .services {
@@ -502,22 +560,20 @@
             width: 350px;
             display: none;
             text-align: center;
-        }
-
-        .login-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            position: relative;
         }
 
         .login-title {
             color: #FF0000;
             font-size: 1.5em;
-            margin: 0;
+            margin-bottom: 20px;
         }
 
+        /* Botón de cierre reposicionado en la esquina superior derecha */
         .close-login {
+            position: absolute;
+            top: 10px;
+            right: 10px;
             background: #FF0000;
             color: white;
             border: none;
@@ -529,6 +585,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-login:hover {
+            background: #8B0000;
         }
 
         .login-input {
@@ -819,6 +880,9 @@
                 margin-right: 0;
                 margin-bottom: 10px;
             }
+            .logo-background {
+                width: 200px;
+            }
         }
     </style>
 </head>
@@ -847,11 +911,13 @@
         <div class="container">
             <header>
                 <div class="logo-container">
-                    <div class="logo-bg"></div>
+                    <div class="logo-background"></div>
+                    <div class="logo-tech-bg"></div>
+                    <div class="logo-circuit"></div>
                     <div class="logo">ZP</div>
                     <div class="logo-shine"></div>
                 </div>
-                <div class="subtitle">Technical Services</div>
+                <div class="subtitle">Servicio Técnico</div>
             </header>
 
             <section class="services">
@@ -877,7 +943,8 @@
                 <!-- Servicio de Office -->
                 <div class="service-card" onclick="toggleService(2, 'Microsoft Office')">
                     <div class="service-title">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Microsoft_Office_logo_%282019%E2%80%93present%29.svg" alt="Microsoft Office" class="service-icon">
+                        <img src="https://cdn-icons-png.flaticon.com/512/888/888867.png" alt="Microsoft Office" class="service-icon">
+                        
                         <h3>Microsoft Office</h3>
                     </div>
                     <div class="service-details" id="service-2">
@@ -955,6 +1022,50 @@
                         </button>
                     </div>
                 </div>
+
+                <!-- Nuevo Servicio: Ensamblado de PC -->
+                <div class="service-card" onclick="toggleService(6, 'Ensamblado de PC')">
+                    <div class="service-title">
+                        <i class="fas fa-desktop service-icon"></i>
+                        <h3>Ensamblado de PC</h3>
+                    </div>
+                    <div class="service-details" id="service-6">
+                        <button class="service-button" onclick="redirectToWhatsApp('Ensamblado de PC', 'Armado completo', 'assembly-complete')">
+                            Armado completo - <span class="price" id="assembly-complete">$100,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Ensamblado de PC', 'Ensamblado de memorias', 'assembly-memory')">
+                            Ensamblado de memorias - <span class="price" id="assembly-memory">$25,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Ensamblado de PC', 'Ensamblado de disipador', 'assembly-cooler')">
+                            Ensamblado de disipador - <span class="price" id="assembly-cooler">$30,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Ensamblado de PC', 'Ensamblado de disco', 'assembly-disk')">
+                            Ensamblado de disco - <span class="price" id="assembly-disk">$25,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Ensamblado de PC', 'Ensamblado de fuente', 'assembly-psu')">
+                            Ensamblado de fuente - <span class="price" id="assembly-psu">$30,000 COP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Nuevo Servicio: Rendimiento -->
+                <div class="service-card" onclick="toggleService(7, 'Rendimiento')">
+                    <div class="service-title">
+                        <i class="fas fa-tachometer-alt service-icon"></i>
+                        <h3>Rendimiento</h3>
+                    </div>
+                    <div class="service-details" id="service-7">
+                        <button class="service-button" onclick="redirectToWhatsApp('Rendimiento', 'Rendimiento de red', 'performance-network')">
+                            Rendimiento de red - <span class="price" id="performance-network">$45,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Rendimiento', 'Rendimiento de RAM', 'performance-ram')">
+                            Rendimiento de RAM - <span class="price" id="performance-ram">$40,000 COP</span>
+                        </button>
+                        <button class="service-button" onclick="redirectToWhatsApp('Rendimiento', 'Rendimiento de disco', 'performance-disk')">
+                            Rendimiento de disco - <span class="price" id="performance-disk">$45,000 COP</span>
+                        </button>
+                    </div>
+                </div>
             </section>
 
             <a href="#" class="back-button" onclick="showCommentsPage()">Ver Comentarios de Clientes</a>
@@ -1029,7 +1140,7 @@
     </div>
 
     <footer>
-        <div>&copy; 2025 ZP Technical Services</div>
+        <div>&copy; 2025 ZP Servicio Técnico</div>
     </footer>
 
     <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
@@ -1037,10 +1148,8 @@
 
     <!-- Panel de Login para Administrador -->
     <div class="login-panel" id="login-panel">
-        <div class="login-header">
-            <h2 class="login-title">Acceso Administrativo</h2>
-            <button class="close-login" onclick="closeLoginPanel()">×</button>
-        </div>
+        <button class="close-login" onclick="closeLoginPanel()">×</button>
+        <h2 class="login-title">Acceso Administrativo</h2>
         <input type="text" id="admin-username" class="login-input" placeholder="Usuario">
         <input type="password" id="admin-password" class="login-input" placeholder="Contraseña">
         <button class="login-button" onclick="validateLogin()">Iniciar Sesión</button>
@@ -1147,6 +1256,48 @@
                 <input type="text" id="admin-update-hardware" value="60,000">
             </div>
         </div>
+
+        <!-- Ensamblado de PC -->
+        <div class="admin-section">
+            <h3>Ensamblado de PC</h3>
+            <div class="price-input">
+                <label>Armado completo:</label>
+                <input type="text" id="admin-assembly-complete" value="100,000">
+            </div>
+            <div class="price-input">
+                <label>Ensamblado de memorias:</label>
+                <input type="text" id="admin-assembly-memory" value="25,000">
+            </div>
+            <div class="price-input">
+                <label>Ensamblado de disipador:</label>
+                <input type="text" id="admin-assembly-cooler" value="30,000">
+            </div>
+            <div class="price-input">
+                <label>Ensamblado de disco:</label>
+                <input type="text" id="admin-assembly-disk" value="25,000">
+            </div>
+            <div class="price-input">
+                <label>Ensamblado de fuente:</label>
+                <input type="text" id="admin-assembly-psu" value="30,000">
+            </div>
+        </div>
+
+        <!-- Rendimiento -->
+        <div class="admin-section">
+            <h3>Rendimiento</h3>
+            <div class="price-input">
+                <label>Rendimiento de red:</label>
+                <input type="text" id="admin-performance-network" value="45,000">
+            </div>
+            <div class="price-input">
+                <label>Rendimiento de RAM:</label>
+                <input type="text" id="admin-performance-ram" value="40,000">
+            </div>
+            <div class="price-input">
+                <label>Rendimiento de disco:</label>
+                <input type="text" id="admin-performance-disk" value="45,000">
+            </div>
+        </div>
         
         <button class="save-button" onclick="saveAllPrices()">Guardar Cambios</button>
     </div>
@@ -1176,7 +1327,15 @@
             'cleaning-thermal': '30,000',
             'cleaning-full': '75,000',
             'update-os': '50,000',
-            'update-hardware': '60,000'
+            'update-hardware': '60,000',
+            'assembly-complete': '100,000',
+            'assembly-memory': '25,000',
+            'assembly-cooler': '30,000',
+            'assembly-disk': '25,000',
+            'assembly-psu': '30,000',
+            'performance-network': '45,000',
+            'performance-ram': '40,000',
+            'performance-disk': '45,000'
         };
 
         // Mostrar panel de login para administrador
@@ -1261,12 +1420,13 @@
             alert('¡Precios actualizados correctamente!');
         }
 
+        // Función corregida para alternar la visualización de los servicios
         function toggleService(serviceId, serviceName) {
             const details = document.getElementById(`service-${serviceId}`);
             const cards = document.querySelectorAll('.service-card');
             
             // Evitar que se cierre si se hace clic en un botón de servicio
-            if (event.target.classList.contains('service-button')) {
+            if (event && event.target.classList.contains('service-button')) {
                 event.stopPropagation();
                 return;
             }
@@ -1391,7 +1551,7 @@
             localStorage.removeItem('zpUserEmail');
         }
         
-        // Añadir un comentario
+        // Añadir un comentario - Función corregida
         function addComment(event) {
             event.preventDefault();
             
