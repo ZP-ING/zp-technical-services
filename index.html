@@ -1120,15 +1120,15 @@
                             <label>Tu valoración:</label>
                             <div class="stars">
                                 <input type="radio" id="star5" name="rating" value="5" required>
-                                <label for="star5" title="5 estrellas"><i class="fas fa-star"></i></label>
+                                <label for="star5" title="5 estrellas">★</label>
                                 <input type="radio" id="star4" name="rating" value="4">
-                                <label for="star4" title="4 estrellas"><i class="fas fa-star"></i></label>
+                                <label for="star4" title="4 estrellas">★</label>
                                 <input type="radio" id="star3" name="rating" value="3">
-                                <label for="star3" title="3 estrellas"><i class="fas fa-star"></i></label>
+                                <label for="star3" title="3 estrellas">★</label>
                                 <input type="radio" id="star2" name="rating" value="2">
-                                <label for="star2" title="2 estrellas"><i class="fas fa-star"></i></label>
+                                <label for="star2" title="2 estrellas">★</label>
                                 <input type="radio" id="star1" name="rating" value="1">
-                                <label for="star1" title="1 estrella"><i class="fas fa-star"></i></label>
+                                <label for="star1" title="1 estrella">★</label>
                             </div>
                         </div>
                         <textarea id="comment-text" placeholder="Escribe tu comentario aquí..." required></textarea>
@@ -1470,6 +1470,7 @@
             document.getElementById('services-page').style.display = 'none';
             document.getElementById('comments-page').style.display = 'block';
             window.scrollTo(0, 0);
+            loadComments(); // Cargar comentarios al mostrar la página
         }
 
         function showServicesPage() {
@@ -1481,77 +1482,107 @@
         // Funciones para la sección de comentarios
         let userEmail = null;
         
+        // Iniciar sesión de usuario
+        function loginUser(event) {
+            event.preventDefault();
+            const email = document.getElementById('user-email-input').value;
+            
+            if (email && email.includes('@')) {
+                userEmail = email;
+                localStorage.setItem('zpUserEmail', email);
+                
+                document.getElementById('user-email').textContent = email;
+                document.getElementById('user-info').style.display = 'block';
+                document.getElementById('user-login-section').style.display = 'none';
+                document.getElementById('comment-form').style.display = 'block';
+            } else {
+                alert('Por favor ingresa un correo electrónico válido.');
+            }
+        }
+        
+        // Cerrar sesión de usuario
+        function logoutUser() {
+            userEmail = null;
+            localStorage.removeItem('zpUserEmail');
+            
+            document.getElementById('user-info').style.display = 'none';
+            document.getElementById('user-login-section').style.display = 'block';
+            document.getElementById('comment-form').style.display = 'none';
+            document.getElementById('user-email-input').value = '';
+        }
+        
         // Cargar comentarios guardados
         function loadComments() {
             const savedComments = localStorage.getItem('zpComments');
             const commentsList = document.getElementById('comments-list');
             const noCommentsMsg = document.getElementById('no-comments');
             
-            if (savedComments) {
-                const comments = JSON.parse(savedComments);
-                
-                if (comments.length > 0) {
-                    noCommentsMsg.style.display = 'none';
-                    commentsList.innerHTML = '';
-                    
-                    comments.forEach(comment => {
-                        const commentElement = document.createElement('div');
-                        commentElement.className = 'comment';
-                        
-                        // Generar estrellas HTML basado en la valoración
-                        let starsHTML = '';
-                        const rating = comment.rating || 5; // Default a 5 si no hay valoración
-                        for (let i = 1; i <= 5; i++) {
-                            if (i <= rating) {
-                                starsHTML += '<i class="fas fa-star"></i>';
-                            } else {
-                                starsHTML += '<i class="far fa-star"></i>';
-                            }
-                        }
-                        
-                        commentElement.innerHTML = `
-                            <div class="comment-header">
-                                <span class="comment-author">${comment.email}</span>
-                                <span class="comment-date">${comment.date}</span>
-                            </div>
-                            <div class="comment-rating">${starsHTML}</div>
-                            <div class="comment-text">${comment.text}</div>
-                        `;
-                        commentsList.appendChild(commentElement);
-                    });
-                } else {
-                    noCommentsMsg.style.display = 'block';
+            // Comentarios de demostración actualizados
+            const demoComments = [
+                {
+                    email: "zharickGarcia24@gmail.com",
+                    text: "Excelente servicio técnico. Solucionaron mi problema con el Office en menos de una hora. Muy profesionales.",
+                    rating: 5,
+                    date: "15 de marzo de 2025, 10:30"
+                },
+                {
+                    email: "carlosMendoza.tech@gmail.com",
+                    text: "Formatearon mi laptop y la dejaron como nueva. Además me explicaron todo el proceso. Totalmente recomendados.",
+                    rating: 4,
+                    date: "20 de febrero de 2025, 15:45"
+                },
+                {
+                    email: "anaTorres_univalle@outlook.com",
+                    text: "Como estudiante de Univalle, aproveché el descuento para limpiar mi PC. El rendimiento mejoró notablemente.",
+                    rating: 5,
+                    date: "5 de marzo de 2025, 09:15"
                 }
+            ];
+            
+            let comments = [];
+            
+            // Combinar comentarios guardados con los de demostración
+            if (savedComments) {
+                const userComments = JSON.parse(savedComments);
+                comments = [...demoComments, ...userComments];
+            } else {
+                comments = demoComments;
+            }
+            
+            if (comments.length > 0) {
+                noCommentsMsg.style.display = 'none';
+                commentsList.innerHTML = '';
+                
+                // Ordenar comentarios por fecha (más recientes primero)
+                comments.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                comments.forEach(comment => {
+                    const commentElement = document.createElement('div');
+                    commentElement.className = 'comment';
+                    
+                    // Generar estrellas HTML basado en la valoración
+                    let starsHTML = '';
+                    const rating = comment.rating || 5; // Default a 5 si no hay valoración
+                    for (let i = 1; i <= 5; i++) {
+                        starsHTML += i <= rating ? '★' : '☆';
+                    }
+                    
+                    commentElement.innerHTML = `
+                        <div class="comment-header">
+                            <span class="comment-author">${comment.email.split('@')[0]}</span>
+                            <span class="comment-date">${comment.date}</span>
+                        </div>
+                        <div class="comment-rating" style="color: gold; font-size: 1.2em;">${starsHTML}</div>
+                        <div class="comment-text">${comment.text}</div>
+                    `;
+                    commentsList.appendChild(commentElement);
+                });
+            } else {
+                noCommentsMsg.style.display = 'block';
             }
         }
-        
-        // Iniciar sesión de usuario
-        function loginUser(event) {
-            event.preventDefault();
-            userEmail = document.getElementById('user-email-input').value;
-            
-            document.getElementById('user-email').textContent = userEmail;
-            document.getElementById('user-info').style.display = 'block';
-            document.getElementById('user-login-section').style.display = 'none';
-            document.getElementById('comment-form').style.display = 'block';
-            
-            // Guardar el email en localStorage
-            localStorage.setItem('zpUserEmail', userEmail);
-        }
-        
-        // Cerrar sesión de usuario
-        function logoutUser() {
-            userEmail = null;
-            
-            document.getElementById('user-info').style.display = 'none';
-            document.getElementById('user-login-section').style.display = 'block';
-            document.getElementById('comment-form').style.display = 'none';
-            
-            // Eliminar el email de localStorage
-            localStorage.removeItem('zpUserEmail');
-        }
-        
-        // Añadir un comentario - Función corregida
+
+        // Añadir nuevo comentario
         function addComment(event) {
             event.preventDefault();
             
@@ -1610,7 +1641,7 @@
             loadComments();
             
             // Mostrar mensaje de confirmación
-            alert('¡Comentario publicado correctamente!');
+            alert('¡Comentario publicado correctamente! Gracias por tu feedback.');
         }
         
         // Verificar si el usuario ya ha iniciado sesión
