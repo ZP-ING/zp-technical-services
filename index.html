@@ -1459,11 +1459,11 @@
             // Oculta el anuncio después de 20 segundos
             setTimeout(() => {
                 promoBanner.style.display = 'none';
-            }, 20000); // 20 segundos
+            }, 15000); // 15 segundos
         }
 
-        // Mostrar el anuncio cada 30 segundos
-        setInterval(showPromo, 30000); // 30 segundos
+        // Mostrar el anuncio cada 3 minuto
+        setInterval(showPromo, 180000); // el tiempo lo mido en milisegundos
 
         // Funciones para cambiar entre páginas
         function showCommentsPage() {
